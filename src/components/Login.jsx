@@ -1,13 +1,6 @@
 import Input from "./Input";
 import useInput from "./useInput";
-
-const emailValidation = (email) => {
-  return email.includes("@");
-};
-
-const passwordValidation = (password) => {
-  return password.trim().length > 6;
-};
+import {isEmail, hasMinLength} from '../util/validation'
 
 export default function Login() {
   const {
@@ -15,14 +8,14 @@ export default function Login() {
     handleInputChange: handleEmailChange,
     handleBlur: handleEmailBlur,
     hasError: isEmailValid,
-  } = useInput("", emailValidation);
+  } = useInput("", isEmail);
 
   const {
     value: password,
     handleInputChange: handlePasswordChange,
     handleBlur: handlePasswordBlur,
     hasError: ispasswordValid,
-  } = useInput("", passwordValidation);
+  } = useInput("", hasMinLength);
 
   const setFormSubmit = (event) => {
     event.preventDefault();
